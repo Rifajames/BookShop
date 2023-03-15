@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailActivity">
+
+    <ImageView
+        android:id="@+id/movie_photo"
+        android:layout_width="116dp"
+        android:layout_height="119dp"
+        android:src="@color/cardview_dark_background" />
+
+    <TextView
+        android:id="@+id/movie_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/movie_photo"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:text="Nama Film"/>
+
+    <TextView
+        android:id="@+id/movie_releasedata"
+        android:layout_toRightOf="@id/movie_photo"
+        android:layout_below="@id/movie_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16sp"
+        android:layout_marginTop="16dp"
+        android:maxLines="4"
+        android:text="Release Date"/>
+
+
+</RelativeLayout>
