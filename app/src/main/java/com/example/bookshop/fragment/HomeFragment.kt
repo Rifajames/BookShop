@@ -69,13 +69,14 @@ class HomeFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
         rv_movies_list.layoutManager = layoutManager
         rv_movies_list.setHasFixedSize(true)
-        //getMovieData { movies : List<Movie> ->
+        getMovieData { movies : List<Movie> ->
             rv_movies_list.adapter = MovieAdapter(movies){
-                val intent = Intent(this, DetailActivity::class.java)
+                //val intent = Intent(this, DetailActivity::class.java)
+                val intent = Intent(context, DetailActivity::class.java)
                 intent.putExtra(INTENT_PARCELABLE,it)
                 startActivity(intent)
             }
-        //}
+        }
     }
 
     companion object {
