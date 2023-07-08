@@ -6,8 +6,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.bookshop.fragment.HomeFragment
+import com.example.bookshop.models.CartItem
 import com.example.bookshop.models.Movie
-import kotlinx.android.synthetic.main.movie_item.view.*
+import kotlinx.android.synthetic.main.activity_detail.btnAddtoCart
 
 class DetailActivity : AppCompatActivity() {
 
@@ -24,8 +25,14 @@ class DetailActivity : AppCompatActivity() {
 
         if(movie != null){
             Glide.with(this).load(IMAGE_BASE + movie.poster_path).into(imgSrc)
-            imTitle.setText(movie.title)
-            imRelease.setText(movie.release_date)
+            imTitle.text = movie.title
+            imRelease.text = movie.release_date
+        }
+
+        btnAddtoCart.setOnClickListener {
+            val item = CartItem(movie?.title.toString(), movie?.poster_path.toString())
+            val shoppingCartManager = ShoppingCartManager(this)
+            shoppingCartManager.addToCart(item)
         }
     }
 }

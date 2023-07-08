@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookshop.DetailActivity
-import com.example.bookshop.MovieAdapter
+import com.example.bookshop.adapter.MovieAdapter
 import com.example.bookshop.R
 import com.example.bookshop.models.Movie
 import com.example.bookshop.models.MovieResponse
