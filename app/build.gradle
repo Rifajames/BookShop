@@ -65,4 +65,7 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
     implementation("com.squareup.okhttp3:okhttp:4.9.2")
+
+    implementation "androidx.preference:preference-ktx:1.2.0"
+
 }

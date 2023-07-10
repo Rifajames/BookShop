@@ -5,7 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookshop.R
+import com.example.bookshop.ShoppingCartManager
+import com.example.bookshop.adapter.CartitemAdapter
+import kotlinx.android.synthetic.main.cart_item.btndelete_cart_item
+import kotlinx.android.synthetic.main.fragment_shop.rv_movies_cart
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +26,9 @@ class ShopFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var cartManager: ShoppingCartManager
+    private lateinit var cartAdapter: CartitemAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +44,27 @@ class ShopFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_shop, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        cartManager = context?.let { ShoppingCartManager(it) }!!
+        cartAdapter = CartitemAdapter(cartManager.getCartItems())
+
+        val layoutManager = LinearLayoutManager(context)
+        rv_movies_cart.layoutManager = layoutManager
+        rv_movies_cart.setHasFixedSize(true)
+        rv_movies_cart.adapter = cartAdapter
+
+
+        if(btndelete_cart_item != null){
+            btndelete_cart_item.setOnClickListener {
+                cartManager.clearCart()
+            }
+        }
+
+
     }
 
     companion object {
