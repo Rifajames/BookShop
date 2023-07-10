@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookshop.R
 import com.example.bookshop.ShoppingCartManager
 import com.example.bookshop.adapter.CartitemAdapter
+import com.example.bookshop.models.CartItem
 import kotlinx.android.synthetic.main.cart_item.btndelete_cart_item
 import kotlinx.android.synthetic.main.fragment_shop.rv_movies_cart
 
@@ -50,7 +51,7 @@ class ShopFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         cartManager = context?.let { ShoppingCartManager(it) }!!
-        cartAdapter = CartitemAdapter(cartManager.getCartItems())
+        cartAdapter = CartitemAdapter(cartManager.getCartItems(),::deleteItem)
 
         val layoutManager = LinearLayoutManager(context)
         rv_movies_cart.layoutManager = layoutManager
@@ -61,11 +62,15 @@ class ShopFragment : Fragment() {
         if(btndelete_cart_item != null){
             btndelete_cart_item.setOnClickListener {
                 cartManager.clearCart()
+                cartAdapter.notifyDataSetChanged()
             }
         }
+    }
 
+    private fun deleteItem(item: CartItem){
 
     }
+
 
     companion object {
         /**
