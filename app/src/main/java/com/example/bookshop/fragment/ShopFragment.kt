@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookshop.R
 import com.example.bookshop.ShoppingCartManager
 import com.example.bookshop.adapter.CartitemAdapter
+import com.example.bookshop.models.CartItem
 import kotlinx.android.synthetic.main.cart_item.btndelete_cart_item
 import kotlinx.android.synthetic.main.fragment_shop.rv_movies_cart
+import kotlinx.android.synthetic.main.fragment_shop.textView2
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,22 +52,24 @@ class ShopFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         cartManager = context?.let { ShoppingCartManager(it) }!!
-        cartAdapter = CartitemAdapter(cartManager.getCartItems())
+        cartAdapter = CartitemAdapter(cartManager.getCartItems(),::deleteItem)
 
         val layoutManager = LinearLayoutManager(context)
         rv_movies_cart.layoutManager = layoutManager
         rv_movies_cart.setHasFixedSize(true)
         rv_movies_cart.adapter = cartAdapter
-
-
-        if(btndelete_cart_item != null){
-            btndelete_cart_item.setOnClickListener {
-                cartManager.clearCart()
-            }
+        textView2.setOnClickListener {
+            cartManager.clearCart()
+            cartAdapter.listCartItem.clear()
+            cartAdapter.notifyDataSetChanged()
         }
-
-
     }
+
+    private fun deleteItem(item: CartItem){
+        cartManager.deleteItem(item) // shared preference
+        cartAdapter.updateData(item) // update adapter
+    }
+
 
     companion object {
         /**

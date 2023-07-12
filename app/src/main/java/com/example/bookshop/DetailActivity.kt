@@ -30,7 +30,7 @@ class DetailActivity : AppCompatActivity() {
         }
 
         btnAddtoCart.setOnClickListener {
-            val item = CartItem(movie?.title.toString(), movie?.poster_path.toString())
+            val item = movie?.id?.let { it1 -> CartItem(it1,movie?.title.toString(), movie?.poster_path.toString()) }
             val shoppingCartManager = ShoppingCartManager(this)
             shoppingCartManager.addToCart(item)
         }

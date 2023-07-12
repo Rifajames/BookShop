@@ -8,9 +8,11 @@ class ShoppingCartManager(private val context: Context) {
     private val sharedPreferences = context.getSharedPreferences("ShoppingCart", Context.MODE_PRIVATE)
     private val gson = Gson()
 
-    fun addToCart(item: CartItem){
+    fun addToCart(item: CartItem?){
         val cartItems = getCartItems()
-        cartItems.add(item)
+        if (item != null) {
+            cartItems.add(item)
+        }
         saveCartItems(cartItems)
     }
 
@@ -30,5 +32,11 @@ class ShoppingCartManager(private val context: Context) {
 
     fun clearCart() {
         sharedPreferences.edit().remove("CartItems").apply()
+    }
+
+    fun deleteItem(cartItem: CartItem) {
+        val cartItems = getCartItems() // dapetin list
+        cartItems.remove(cartItem) // list itu mau remove yang lu klik delete
+        saveCartItems(cartItems) // list nya udah baru (-) ke delet, lu update share pref lewat sini
     }
 }
