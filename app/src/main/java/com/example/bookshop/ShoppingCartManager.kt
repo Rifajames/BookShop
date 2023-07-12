@@ -34,9 +34,9 @@ class ShoppingCartManager(private val context: Context) {
         sharedPreferences.edit().remove("CartItems").apply()
     }
 
-    fun deleteItem(cartItem: CartItem){
-        val cartItems = getCartItems()
-        cartItems.remove(cartItem)
-        saveCartItems(cartItems)
+    fun deleteItem(cartItem: CartItem) {
+        val cartItems = getCartItems() // dapetin list
+        cartItems.remove(cartItem) // list itu mau remove yang lu klik delete
+        saveCartItems(cartItems) // list nya udah baru (-) ke delet, lu update share pref lewat sini
     }
 }
